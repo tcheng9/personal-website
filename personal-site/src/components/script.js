@@ -1,24 +1,30 @@
-const scrollOffset = 100;
-
 // Target all scroll elements in the page
-const scrollElements = document.querySelectorAll('.js-scroll');
+const scrollElements = document.querySelectorAll(".js-scroll");
 
 //Fade out elements
 
-scrollElements.forEach((element) => {
-    element.style.opacity = 0
-})
+// scrollElements.forEach((element) => {
+//     element.style.opacity = 0
+// })
 
 
 // element is in view
-const elementInView = (el, offset = 0) => {
+const elementInView = (el, dividend = 1) => {
+    const elementTop = el.getBoundingClientRect().top;
+    
+    return (
+        elementTop <= 
+        (window.innerHeight || document.documentElement.clientHeight) / dividend );
+    
+}
+
+const elementOutofView = (el) => {
     const elementTop = el.getBoundingClientRect().top;
 
     return (
-        elementTop <= 
-        ((window.innerHeight || document.documentElement.clientHeight) - offset)
-      );
-}
+        elementTop > (window.innerHeight || document.documentElement.clientHeight)
+    );
+};
 
 //Assign class name to element
 const displayScrollElement = (element) => {
@@ -26,20 +32,24 @@ const displayScrollElement = (element) => {
 };
 
 //hide elements
-const hideScrollElement = () => {
-    scrollElements.classList.remove("scrolled");
+const hideScrollElement = (element) => {
+    element.classList.remove("scrolled");
 }
 
 //Handling scroll aniimation
 const handleScrollAnimation = () => {
-    if (elementInView(scrollElements, scrollOffset)) {
-        displayScrollElement();
-    } else {
-      hideScrollElement();
-    }
-  }
+    scrollElements.forEach((el) => {
+        if (elementInView(el, 1.25)){
+            displayScrollElement(el);
+        } else if (elementOutofView(el)) {
+            hideScrollElement(el);
+        }
+    })
+    
+}
 
 
-window.addEventListener('scroll', () => {
+window.addEventListener("scroll", () => {
     handleScrollAnimation();
 })
+
