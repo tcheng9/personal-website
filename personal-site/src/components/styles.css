@@ -74,15 +74,45 @@
   
 }
 
-.contact-me{
+/* Titles for sections */
+.title{
   text-align:center;
+  font-size: 64px;
 }
 
 
+/* Styling sections of contact me  */
+.about-me-container{
+  
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+  height: 70vh;
 
+  grid-gap: 10vh;
+  
 
+}
+/* Styling section of projects */
+.projects{
+  text-align:center;
+  
+ 
+}
 
+.project-container{
+  display:flex;
+  flex-direction:row;
+  justify-content:center;
+  align-items:center;
+}
 
+/* Styling section of contact me */
+
+.contact-me-container{
+  text-align:center;
+}
 
 
 
